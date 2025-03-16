@@ -3,11 +3,11 @@
 set -e
 
 # Copy and source the shared functions
-export PROGRESS_FILE="/root/tmp/install_progress"
-source /root/tmp/install_shared.sh
+export PROGRESS_FILE="$HOME/tmp/install_progress"
+source $HOME/tmp/install_shared.sh
 
 # Access environment variables passed from the host
-source /root/tmp/install_env.sh  # We'll create this
+source $HOME/tmp/install_env.sh  # We'll create this
 
 check_required_vars "${COMMON_REQUIRED_VARS[@]}"
 
@@ -53,8 +53,8 @@ fi
 
 if ! should_skip 17; then
     print_step "Creating ZFSBootMenu EFI entry"
-    sudo efibootmgr --create --disk $ESP_DISK --part $ESP_PART \
-        --label "ZFS Boot Menu" --loader '\EFI\zbm\zfsbootmenu-release-vmlinuz-linux-lts.EFI' --unicode
+    sudo efibootmgr --create --disk $EFI_DISK --part $EFI_PART \
+        --label "ZFS Boot Menu" --loader '\EFI\zbm\zfsbootmenu-release-vmlinuz-x86_64.EFI' --unicode
 else
     print_step "Skipping EFI entry creation for ZFSBootMenu"
 fi
@@ -63,7 +63,7 @@ if ! should_skip 18; then
     print_step "Installing KDE Plasma and other applications"
 
     yay -S --noconfirm plasma kitty konsole packagekit packagekit-qt5
-    sudo systemctl enable --now sddm
+    sudo systemctl enable sddm
 
     yay -S --noconfirm ttf-meslo-nerd-font-powerlevel10k zsh-theme-powerlevel10k-git \
         zen-browser-bin visual-studio-code-bin cursor-bin python python-pip ipython sagemath syncthing \
@@ -75,7 +75,7 @@ if ! should_skip 18; then
     # Add mdns_minimal after mymachines in hosts line
     sudo sed -i '/^hosts:/ s/mymachines/mymachines mdns_minimal [NOTFOUND=return]/' /etc/nsswitch.conf
 
-    sudo systemctl enable --now bluetooth cups avahi-daemon
+    sudo systemctl enable bluetooth cups avahi-daemon
 
 else
     print_step "Skipping KDE Plasma installation"

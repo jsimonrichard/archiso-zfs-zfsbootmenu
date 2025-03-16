@@ -1,3 +1,4 @@
 - [ ] Fix errors when resuming after mounting zpool, entering key, etc.
 - [ ] Finish chroot commands
-- [ ] Create script for su commands
+- [x] Create script for su commands
+- [ ] fix resume issues in su script

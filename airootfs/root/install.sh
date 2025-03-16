@@ -101,7 +101,6 @@ if ! should_skip 2; then
     zfs create -o mountpoint=/root zroot/data/home/root
 
     zpool set bootfs=zroot/ROOT/default zroot # TODO: try to make it work without this
-    zpool set cachefile=/etc/zfs/zpool.cache zroot
     zfs set org.zfsbootmenu:commandline="rw" zroot/ROOT
 
     zpool export zroot
@@ -173,19 +172,11 @@ if ! should_skip 6; then
     cp /etc/pacman.conf /mnt/etc/pacman.conf
     cp /etc/pacman.d/archzfs_mirrorlist /mnt/etc/pacman.d/archzfs_mirrorlist
 
-    cp -r /usr/share/pacman/keyrings /mnt/usr/share/pacman/keyrings
+    cp -r /usr/share/pacman/keyrings/* /mnt/usr/share/pacman/keyrings
 
     mark_completed 6
 else
     print_step "Skipping pacman config copy"
-fi
-
-if ! should_skip 7; then
-    print_step "Copying zpool cache"
-    cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
-    mark_completed 7
-else
-    print_step "Skipping zpool cache copy"
 fi
 
 print_step "Executing chroot commands"

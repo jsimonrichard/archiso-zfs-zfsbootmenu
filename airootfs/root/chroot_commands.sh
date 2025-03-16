@@ -15,6 +15,13 @@ check_required_vars "${COMMON_REQUIRED_VARS[@]}"
 mount -a
 zfs mount -a
 
+if ! should_skip 7; then
+    zpool set cachefile=/etc/zfs/zpool.cache zroot
+    mark_completed 7
+else
+    print_step "Skipping zpool cache file setup"
+fi
+
 if ! should_skip 8; then
     print_step "Initializing pacman keyring"
     pacman-key --init
@@ -87,4 +94,7 @@ else
     print_step "Skipping sudo user creation"
 fi
 
-su - $_USERNAME -c "/root/tmp/su_commands.sh"
+cp -r /root/tmp /home/$_USERNAME/tmp
+su - $_USERNAME -c "/home/$_USERNAME/tmp/su_commands.sh"
+
+rm -rf /home/$_USERNAME/tmp
