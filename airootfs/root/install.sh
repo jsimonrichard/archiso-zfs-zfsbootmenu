@@ -100,6 +100,7 @@ if ! should_skip 2; then
     zfs create -o mountpoint=/home zroot/data/home
     zfs create -o mountpoint=/root zroot/data/home/root
 
+    zpool set bootfs=zroot/ROOT/default zroot # TODO: try to make it work without this
     zpool set cachefile=/etc/zfs/zpool.cache zroot
     zfs set org.zfsbootmenu:commandline="rw" zroot/ROOT
 
@@ -156,6 +157,10 @@ fi
 if ! should_skip 5; then
     print_step "Generating fstab"
     genfstab -U -p /mnt >> /mnt/etc/fstab
+    
+    # Comment out ZFS entries
+    sed -i '/^zroot/s/^/#/' /mnt/etc/fstab
+    
     mark_completed 5
 else
     print_step "Skipping fstab generation"
@@ -202,6 +207,12 @@ chmod +x /mnt/root/tmp/chroot_commands.sh
 
 # Copy progress file
 cp $PROGRESS_FILE /mnt/root/tmp
+
+# Copy su commands
+cp "$(dirname $0)/su_commands.sh" /mnt/root/tmp
+
+# Make the tmp directory accessible by all users
+chmod 777 -R /mnt/root/tmp
 
 # Execute the chroot script
 arch-chroot /mnt /root/tmp/chroot_commands.sh
