@@ -126,6 +126,6 @@ wpa_supplicant
 wvdial
 xfsprogs
 xl2tpd
-zfs-linux-lts
+zfs-dkms
 zfs-utils
 zsh
