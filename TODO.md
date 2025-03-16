@@ -2,3 +2,4 @@
 - [ ] Finish chroot commands
 - [x] Create script for su commands
 - [ ] fix resume issues in su script
+- [ ] Fix deleted home dir on boot issue
