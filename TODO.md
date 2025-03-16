@@ -1,0 +1,3 @@
+- [ ] Fix errors when resuming after mounting zpool, entering key, etc.
+- [ ] Finish chroot commands
+- [ ] Create script for su commands
