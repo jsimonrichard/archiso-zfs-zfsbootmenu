@@ -72,8 +72,8 @@ fi
 
 if ! should_skip 14; then
     print_step "Creating sudo user"
-    useradd -m -G wheel -s $(which zsh) $USERNAME
-    passwd $USERNAME
+    useradd -m -G wheel -s $(which zsh) $_USERNAME
+    passwd $_USERNAME
     ln -s /usr/bin/nvim /usr/bin/vim
 
     print_step "Setting up sudo"
@@ -87,4 +87,4 @@ else
     print_step "Skipping sudo user creation"
 fi
 
-su - $USERNAME -c "/root/tmp/su_commands.sh"
+su - $_USERNAME -c "/root/tmp/su_commands.sh"

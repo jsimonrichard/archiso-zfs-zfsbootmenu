@@ -194,8 +194,10 @@ print_step "Executing chroot commands"
 mkdir -p /mnt/root/tmp
 cat > /mnt/root/tmp/install_env.sh << EOF
 export HOSTNAME="$HOSTNAME"
-export USERNAME="$USERNAME"
+export _USERNAME="$_USERNAME"
 export TIMEZONE="$TIMEZONE"
+export EFI_DISK="$EFI_DISK"
+export EFI_PART="$EFI_PART"
 EOF
 
 # Copy shared functions

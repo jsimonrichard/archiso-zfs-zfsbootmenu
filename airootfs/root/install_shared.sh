@@ -7,7 +7,7 @@ fi
 LAST_COMPLETED_STEP=0
 
 # Common required variables
-COMMON_REQUIRED_VARS=("HOSTNAME" "TIMEZONE" "USERNAME")
+COMMON_REQUIRED_VARS=("HOSTNAME" "TIMEZONE" "_USERNAME" "EFI_DISK" "EFI_PART")
 
 print_step() {
     local blue='\033[0;34m'
