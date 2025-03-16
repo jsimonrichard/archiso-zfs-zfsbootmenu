@@ -74,7 +74,8 @@ curl -s https://raw.githubusercontent.com/eoli3n/archiso-zfs/master/init | bash
 # may need to update the /etc/pacman.d/mirrorlist
 nvim /etc/pacman.d/mirrorlist # add Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch (may not be necessary)
 
-
+pacman-key --init
+pacman-key --populate
 
 pacman -Sy zfs-dkms # build for the latest patch of the lts kernel
 # ---------
