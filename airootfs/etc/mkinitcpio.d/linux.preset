@@ -1,4 +1,6 @@
 # mkinitcpio preset file for the 'linux' package on archiso
+# This prevents multiple initramfs images from being built.
+# Removing it does not prevent the latest linux kernel from being used.
 
 PRESETS=('archiso')
 
