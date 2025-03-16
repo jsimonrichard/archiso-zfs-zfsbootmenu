@@ -16,6 +16,8 @@ mount -a
 zfs mount -a
 
 if ! should_skip 7; then
+    print_step "Setting zpool settings"
+    zpool set bootfs=zroot/ROOT/default zroot # Maybe got unset before?
     zpool set cachefile=/etc/zfs/zpool.cache zroot
     mark_completed 7
 else
