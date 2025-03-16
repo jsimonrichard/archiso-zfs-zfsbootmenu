@@ -2,4 +2,3 @@
 
 pacman-key --init
 pacman-key --populate
-pacman-key --lsign-key F75D9D76
