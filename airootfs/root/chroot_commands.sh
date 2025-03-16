@@ -87,4 +87,4 @@ else
     print_step "Skipping sudo user creation"
 fi
 
-
+su - $USERNAME -c "/root/tmp/su_commands.sh"
