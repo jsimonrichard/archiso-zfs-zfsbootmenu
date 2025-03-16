@@ -144,7 +144,7 @@ if ! should_skip 4; then
     fi
 
     pacstrap -K /mnt base base-devel linux-lts linux-firmware linux-lts-headers \
-        zfs-dkms zfs-utils git neovim zsh which sudo efibootmgr openssh zellij \
+        zfs-linux-lts zfs-utils git neovim zsh which sudo efibootmgr openssh zellij \
         networkmanager dhcpcd wpa_supplicant iw iwd $UCODE_PACKAGE
     
     mark_completed 4
